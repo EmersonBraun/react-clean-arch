@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect } from 'react'
 
 import type { AnalyticsService } from '../../../application/use-cases/GetUserProfile'
@@ -45,7 +46,7 @@ export function AnalyticsProvider({ children, userId, userProperties }: Analytic
         userAgent: navigator.userAgent
       })
     }
-  }, [userId, userProperties, analytics])
+  }, [userId, userProperties, analytics, setUserContext])
 
   // Track route changes
   useEffect(() => {

@@ -120,11 +120,23 @@ export class User {
     }
   }
 
-  static fromApiData(apiData: any): User {
+  static fromApiData(apiData: {
+    id: string
+    email: string
+    name: string
+    full_name: string
+    membership_type: 'free' | 'premium'
+    plan: 'free' | 'premium'
+    purchase_count?: number
+    orders_count?: number
+    total_spent?: number
+    lifetime_value?: number
+    created_at?: string | Date
+  }): User {
     return new User({
       id: apiData.id,
       email: apiData.email,
-      name: apiData.name || apiData.full_name,
+      name: apiData.name ?? apiData.full_name,
       membershipType: apiData.membership_type || apiData.plan || 'free',
       purchaseCount: apiData.purchase_count || apiData.orders_count || 0,
       totalSpent: apiData.total_spent || apiData.lifetime_value || 0,

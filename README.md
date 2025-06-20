@@ -1,54 +1,151 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + Clean Architecture
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates the implementation of Clean Architecture in a React application with TypeScript and Vite. The application manages user profiles with features for listing, viewing, editing, and membership upgrades.
 
-Currently, two official plugins are available:
+## 🏗️ Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project follows Clean Architecture principles, organizing code into well-defined layers:
 
-## Expanding the ESLint configuration
+### 📁 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+src/
+├── domain/           # Domain layer (business rules)
+│   ├── entities/     # Domain entities
+│   └── repositories/ # Repository interfaces
+├── application/      # Application layer (use cases)
+│   ├── use-cases/    # Application use cases
+│   ├── services/     # Application services
+│   └── dto/          # Data transfer objects
+├── infrastructure/   # Infrastructure layer
+│   ├── repositories/ # Repository implementations
+│   ├── services/     # External services
+│   └── config/       # Configuration
+└── ui/              # Interface layer (presentation)
+    ├── components/   # React components
+    ├── pages/        # Application pages
+    ├── hooks/        # Custom hooks
+    └── providers/    # React providers
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🎯 Architecture Layers
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### **Domain Layer** (`src/domain/`)
+- **Entities**: Define core business rules (e.g., `User`)
+- **Repositories**: Interfaces that define contracts for data access
+- **Validation**: Domain validation rules
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+#### **Application Layer** (`src/application/`)
+- **Use Cases**: Orchestrate business operations
+  - `GetUserProfile`: Retrieves user profile
+  - `UpdateUserProfile`: Updates user data
+  - `ListUsers`: Lists all users
+  - `UpgradeMembership`: Handles membership upgrades
+- **Services**: Application services
+- **DTOs**: Objects for data transfer between layers
+
+#### **Infrastructure Layer** (`src/infrastructure/`)
+- **Repositories**: Concrete implementations of repositories
+  - `MockUserRepository`: Implementation with mocked data
+- **Services**: External service integrations
+- **Config**: Application configuration
+
+#### **UI Layer** (`src/ui/`)
+- **Components**: Reusable React components
+- **Pages**: Application pages
+- **Hooks**: Custom hooks for UI logic
+- **Providers**: Providers for dependency injection
+
+## 🚀 Technologies Used
+
+- **React 19** - User interface library
+- **TypeScript** - Static typing
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling framework
+- **Formik** - Form management
+- **Zod** - Schema validation
+- **Lucide React** - Icons
+- **Faker.js** - Mock data generation
+
+## 🛠️ How to Run
+
+### Prerequisites
+- Node.js 18+ or Bun
+- npm, yarn or bun
+
+### Installation
+```bash
+# With npm
+npm install
+
+# With yarn
+yarn install
+
+# With bun
+bun install
 ```
+
+### Development
+```bash
+# With npm
+npm run dev
+
+# With yarn
+yarn dev
+
+# With bun
+bun dev
+```
+
+### Build
+```bash
+# With npm
+npm run build
+
+# With yarn
+yarn build
+
+# With bun
+bun run build
+```
+
+### Linting
+```bash
+# With npm
+npm run lint
+
+# With yarn
+yarn lint
+
+# With bun
+bun run lint
+```
+
+## 🎨 Features
+
+### Users
+- **Listing**: View all users
+- **Profile**: Detailed profile view
+- **Editing**: Update personal data
+- **Upgrade**: Membership improvement
+
+### Validation
+- Form validation with Zod
+- Domain validation with business rules
+- Error handling with Error Boundary
+
+### Dependency Injection
+- DI container for dependency management
+- Clear separation between implementations and interfaces
+
+## 📋 Clean Architecture Principles
+
+1. **Framework Independence**: Domain doesn't depend on React or other libraries
+2. **Testability**: Each layer can be tested independently
+3. **UI Independence**: Business logic doesn't depend on the interface
+4. **Database Independence**: Domain doesn't know persistence details
+5. **External Agency Independence**: Business rules don't depend on external APIs
+
+## 📝 License
+
+This project is open source and available under the MIT license.
