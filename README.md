@@ -10,9 +10,10 @@ The project follows Clean Architecture principles, organizing code into well-def
 
 ```
 src/
-├── domain/           # Domain layer (business rules)
-│   ├── entities/     # Domain entities
-│   └── repositories/ # Repository interfaces
+├── domain/
+│   ├── entities/           # User, Product, Order
+│   ├── repositories/       # Interfaces
+│   └── services/          # Domain services
 ├── application/      # Application layer (use cases)
 │   ├── use-cases/    # Application use cases
 │   ├── services/     # Application services
