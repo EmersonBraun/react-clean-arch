@@ -2,7 +2,7 @@ import { User } from '../../domain/entities/User'
 import type { UserRepository } from '../../domain/repositories/UserRepository'
 import { faker } from '@faker-js/faker'
 
-export class MockUserRepository implements UserRepository {
+export class HttpUserRepository implements UserRepository {
   private users: Map<string, User> = new Map()
 
   constructor() {

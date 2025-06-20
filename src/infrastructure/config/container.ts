@@ -74,8 +74,8 @@ export const container = new Container()
 import { ConsoleAnalyticsService } from '../services/AnalyticsService'
 // Register services
 import { GetUserProfile } from '../../application/use-cases/GetUserProfile'
+import { HttpUserRepository } from '../repositories/HttpUserRepository'
 import { ListUsers } from '../../application/use-cases/ListUsers'
-import { MockUserRepository } from '../repositories/MockUserRepository'
 import { UpdateUserProfile } from '../../application/use-cases/UpdateUserProfile'
 import { UpgradeMembership } from '../../application/use-cases/UpgradeMembership'
 
@@ -83,7 +83,7 @@ import { UpgradeMembership } from '../../application/use-cases/UpgradeMembership
 console.log('Container: Registering infrastructure services')
 container.register('UserRepository', () => {
   console.log('Container: Creating MockUserRepository instance')
-  return new MockUserRepository()
+  return new HttpUserRepository()
 })
 container.register('AnalyticsService', () => {
   console.log('Container: Creating ConsoleAnalyticsService instance')
